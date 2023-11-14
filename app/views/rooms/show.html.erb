@@ -1,0 +1,22 @@
+<div>
+    <%= render "room-list", room: @room %>
+</div>
+<div style="border: 1px solid green; display: grid; grid-template-rows: 10% 1fr 10%;">
+    <div style="border: 1px solid blue; padding: 1vw;">
+        <h1 style="border: 1px solid red; height: 100%; width: 100%; margin: 0;"><%= @room.name %></h1>
+    </div>
+    <div style="border: 1px solid blue; overflow: auto; scrollbar-width: none;" class="messages">
+        <% @room.messages.each do |message| %>
+            <div style="border: 1px solid red; ">
+                <p><%= message.message %></p>
+            </div>
+        <% end %>
+    </div>
+    <%= render "messages/form" %>
+</div>
+
+<style>
+    .messages::-webkit-scrollbar {
+        display: none;
+    }
+</style>
