@@ -1,9 +1,10 @@
 development:
   adapter: redis
   url: redis://localhost:6379/1
+  channel_prefix: simpultech_test_development
 
 test:
-  adapter: test
+  adapter: async
 
 production:
   adapter: redis

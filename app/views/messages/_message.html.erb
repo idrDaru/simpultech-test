@@ -1,0 +1,7 @@
+<div style="border: 1px solid blue; overflow: auto; scrollbar-width: none;" class="messages" id="messages">
+    <% room.messages.each do |message| %>
+        <div style="border: 1px solid red; ">
+            <p><%= message.message %></p>
+        </div>
+    <% end %>
+</div>

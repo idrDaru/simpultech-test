@@ -11,10 +11,9 @@ class RoomsController < ApplicationController
     end
 
     def create
-        @room = Room.new(room_params)
-
-        if @room.save
-            redirect_to "/"
+        @room = Room.create(room_params)
+        if @room.persisted?
+            ActionCable.server.broadcast("rooms", @room)
         else
             render :new, status: :unprocessable_entity
         end

@@ -2,7 +2,11 @@ class MessagesController < ApplicationController
   def create
     @room = Room.find(params[:room_id])
     @message = @room.messages.create(message_params)
-    redirect_to room_path(@room)
+    if @message.persisted?
+      ActionCable.server.broadcast("chat", @message)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private

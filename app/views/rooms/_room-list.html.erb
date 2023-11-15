@@ -1,9 +1,11 @@
 <h1>Rooms</h1>
-<ul>
+<ul id="room-list">
     <% @rooms.each do |room| %>
         <li>
-            <%= link_to room.name, room %>
+            <%= link_to(room.name, room)%>
         </li>
     <% end %>
 </ul>
-<%= render "form", room: @room_form %>
+
+
+<%= render "form" %>
