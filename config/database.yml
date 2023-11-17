@@ -29,17 +29,20 @@ default: &default
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  username: imam
-  password: Testpass123
 
 development:
   <<: *default
   database: simpultech_test_development
+  username: imam
+  password: Testpass123
 
 test:
   <<: *default
   database: simpultech_test_test
+  username: imam
+  password: Testpass123
 
 production:
   <<: *default
   database: simpultech_test_production
+  url: <%= ENV['DATABASE_URL'] %>
