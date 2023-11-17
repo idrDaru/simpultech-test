@@ -13,12 +13,5 @@ consumer.subscriptions.create("RoomChannel", {
 
   received(data) {
     // Called when there's incoming data on the websocket for this channel
-    const roomList = document.getElementById("room-list");
-    const roomItem = document.createElement("li");
-    const roomLink = document.createElement("a");
-    roomLink.innerHTML = data.name;
-    roomLink.href = `/rooms/${data.id}`
-    roomItem.appendChild(roomLink);
-    roomList.appendChild(roomItem);
   }
 });

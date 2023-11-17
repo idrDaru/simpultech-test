@@ -1,7 +1,8 @@
 class RoomsController < ApplicationController
     def index
-        @rooms = Room.all
+        rooms_all = Room.all
         @room_form = Room.new
+        @rooms = rooms_all.as_json(include: :messages)
     end
 
     def show
@@ -13,7 +14,8 @@ class RoomsController < ApplicationController
     def create
         @room = Room.create(room_params)
         if @room.persisted?
-            ActionCable.server.broadcast("rooms", @room)
+            room_with_messages = @room.as_json(include: :messages)
+            ActionCable.server.broadcast("rooms", room_with_messages)
         else
             render :new, status: :unprocessable_entity
         end

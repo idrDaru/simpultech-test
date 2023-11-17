@@ -1,8 +1,1 @@
-<div style="border: 1px solid green">
-    <%= render "room-list" %>
-</div>
-<div style="border: 1px solid green; display: grid; grid-template-rows: 10% 1fr 10%;">
-    <div style="border: 1px solid blue; padding: 1vw;">
-        <h1 style="border: 1px solid red; height: 100%; width: 100%; margin: 0;">Messages</h1>
-    </div>
-</div>
+<%= react_component "App", prerender: true, initialRooms: @rooms, formAuthenticityToken: form_authenticity_token %>

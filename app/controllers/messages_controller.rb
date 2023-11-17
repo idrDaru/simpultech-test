@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
     @room = Room.find(params[:room_id])
     @message = @room.messages.create(message_params)
     if @message.persisted?
-      ActionCable.server.broadcast("chat", @message)
+      room_with_messages = @room.as_json(include: :messages)
+      ActionCable.server.broadcast("chat", room_with_messages)
     else
       render :new, status: :unprocessable_entity
     end
@@ -11,6 +12,6 @@ class MessagesController < ApplicationController
 
   private
     def message_params
-      params.require(:message).permit(:message)
+      params.require(:room).permit(:message)
     end
 end
