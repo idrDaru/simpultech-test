@@ -10,32 +10,15 @@ injectGlobal`
         margin: 0;
         padding: 0;
         font-family: "calibri", sans-serif, "Open Sans";
+        background-color: #404258;
     }
 `
 const Container = styled.div`
-    border: 1px solid red;
     display: grid; 
-    grid-template-columns: 20% 1fr; 
+    grid-template-columns: 20% 80%; 
     height: 100vh; 
     width: 100vw; 
-    box-sizing: border-box;
 `;
-
-const RoomContainer = styled.div`
-    overflow: auto;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    border: 1px solid green;
-`;
-
-const MessageContainer = styled.div`
-    border: 1px solid green; 
-    display: grid; 
-    grid-template-rows: 10% 1fr 10%;
-`;
-
 
 export default function App({ initialRooms, formAuthenticityToken }){
     const [rooms, setRooms] = useState([]);
@@ -67,11 +50,7 @@ export default function App({ initialRooms, formAuthenticityToken }){
     }
 
     return <Container>
-        <RoomContainer>
-            <Room rooms={rooms} onClick={handleSelectedRoom} formAuthenticityToken={formAuthenticityToken}/>
-        </RoomContainer>
-        <MessageContainer>
-            <Messages selectedRoom={selectedRoom} messages={messages} formAuthenticityToken={formAuthenticityToken}/>
-        </MessageContainer>
+        <Room rooms={rooms} onClick={handleSelectedRoom} formAuthenticityToken={formAuthenticityToken} selectedRoom={selectedRoom}/>
+        <Messages selectedRoom={selectedRoom} messages={messages} formAuthenticityToken={formAuthenticityToken}/>
     </Container>
 }
