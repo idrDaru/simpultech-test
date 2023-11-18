@@ -11,7 +11,11 @@ WORKDIR /rails
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    DATABASE_URL="postgresql://postgres:fe3AEFCddB5A1-1geaEdcEbBbf6gD-ad@monorail.proxy.rlwy.net:26591/railway" \
+    REDIS_URL="redis://default:LKJBifgI3IofHI1OfHLGaPMLe23ilLki@monorail.proxy.rlwy.net:16363" \
+    SECRET_KEY_BASE="2a95de21de21f4cdd1fd2e56f2a2ba58d8dba00399506232868ff05072c6d24c95d036b1917a55b8b28cd90120374aa30791d9473d56cdda754a0975678b4f35" \
+    RAILS_SERVE_STATIC_FILES=true
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -37,7 +41,7 @@ RUN yarn install --check-files
 COPY . .
 
 # Precompile assets including React code
-RUN NODE_OPTIONS=--openssl-legacy-provider SECRET_KEY_BASE=2a95de21de21f4cdd1fd2e56f2a2ba58d8dba00399506232868ff05072c6d24c95d036b1917a55b8b28cd90120374aa30791d9473d56cdda754a0975678b4f35 bundle exec rails webpacker:compile
+RUN NODE_OPTIONS=--openssl-legacy-provider bundle exec rails webpacker:compile
 
 # Adjust binfiles to be executable on Linux
 RUN chmod +x bin/* && \
@@ -53,7 +57,7 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
+    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips nodejs npm libpq-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
