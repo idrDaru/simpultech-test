@@ -21,7 +21,8 @@ const Header = styled.div`
 `;
 
 const Body = styled.div`
-    display: grid;
+    display: flex;
+    flex-direction: column;
     overflow: auto;
     scrollbar-width: none;
     &::-webkit-scrollbar {
