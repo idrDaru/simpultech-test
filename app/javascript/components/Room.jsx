@@ -54,7 +54,7 @@ export default function Room({ rooms, onClick, formAuthenticityToken }) {
         setRoomName(e.target.value);
     }
 
-    return <>
+    return <React.Fragment>
         <Header>
             <h1>Rooms</h1>
         </Header>
@@ -70,5 +70,5 @@ export default function Room({ rooms, onClick, formAuthenticityToken }) {
                 <input type="submit" name="commit" value={"Create Room"} datadisablewith="Create Room" />
             </form>
         </Footer>
-    </>
+    </React.Fragment>
 }

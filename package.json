@@ -1,4 +1,7 @@
 {
+  "name": "simpultech_test_imam",
+  "version": "1.0.0",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "7",
     "@babel/plugin-proposal-private-methods": "7",

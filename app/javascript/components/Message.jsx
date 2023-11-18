@@ -59,7 +59,7 @@ export default function Messages({ selectedRoom, formAuthenticityToken, messages
         setMessage(e.target.value);
     }
 
-    return <>
+    return <React.Fragment>
         <Header>
             <h1>{selectedRoom && selectedRoom.name}</h1>
         </Header>
@@ -79,5 +79,5 @@ export default function Messages({ selectedRoom, formAuthenticityToken, messages
                 </div>
             </Footer>
         </form>}
-    </>
+    </React.Fragment>
 };
